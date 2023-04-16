@@ -1,14 +1,22 @@
 #include "gcd.h"
-#include <cmath>
+
+#include <utility>
+
+using namespace std;
 
 unsigned gcd(unsigned x, unsigned y) {
-  if (y == 0) {
-    return x;
+
+  // Ensure that x >= y
+  if (y > x) {
+    swap(x, y);
   }
 
-  if (x > y) {
-    return gcd(y, x % y);
+  while (y > 0) {
+    const unsigned remainder = x % y;
+
+    x = y;
+    y = remainder;
   }
 
-  return gcd(y, y % x);
+  return x;
 }
